@@ -1,7 +1,13 @@
 import React from "react";
+import "./App.css";
+import YoutubeForm from "./components/YoutubeForm";
 
 const App = () => {
-  return <h1>Test</h1>;
+  return (
+    <div className="App">
+      <YoutubeForm />
+    </div>
+  );
 };
 
 export default App;
