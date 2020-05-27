@@ -6,29 +6,18 @@ const initialValues = {
   email: "",
   channel: "",
   comments: "",
+  address: "VOC Street",
 };
 
 const onSubmit = (values) => {
   console.log("On submit", values);
 };
 
-const validate = (values) => {
-  let errors = {};
-
-  if (!values.name) errors.name = "Required";
-  if (!values.email) {
-    errors.email = "Required";
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = "Invalid email format";
-  }
-  if (!values.channel) errors.channel = "Required";
-  return errors;
-};
-
 const validationSchema = Yup.object({
   name: Yup.string().required("Required"),
   email: Yup.string().email("Invalid email address").required("Required"),
   channel: Yup.string().required("Required"),
+  address: Yup.string().required("Required"),
 });
 
 const YoutubeForm = () => {
@@ -60,6 +49,21 @@ const YoutubeForm = () => {
           <label htmlFor="channel">Channel</label>
           <Field type="text" id="channel" name="channel" />
           <ErrorMessage name="channel" />
+        </div>
+
+        <div className="form-control">
+          <label htmlFor="address">Address</label>
+          <Field name="address">
+            {(props) => {
+              const { field, form, meta } = props;
+              return (
+                <div>
+                  <input type="text" id="address" {...field} />
+                  {meta.touched && meta.error ? <div>{meta.error}</div> : null}
+                </div>
+              );
+            }}
+          </Field>
         </div>
 
         <div className="form-control">
